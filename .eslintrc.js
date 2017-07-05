@@ -41,7 +41,7 @@ module.exports = {
 		"react/prefer-es6-class": ["error"],
 		"react/jsx-pascal-case": ["error"],
 		"react/sort-comp": ["off"],
-		"react/jsx-no-bind": ["error"],
+		// "react/jsx-no-bind": ["error"],
 		"react/self-closing-comp": ["error"]
 
 	}
