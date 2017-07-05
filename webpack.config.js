@@ -24,6 +24,11 @@ module.exports = {
 				use: [
 					{
 						loader: 'babel-loader'
+					}, {
+						loader: 'eslint-loader',
+						options: {
+							failOnError: true
+						}
 					}
 				]
 			}, {
@@ -48,5 +53,8 @@ module.exports = {
 				removeComments: true
 			}
 		})
-	]
+	],
+	resolve: {
+		extensions: ['.js','.jsx', '.css']
+	}
 };
