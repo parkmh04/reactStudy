@@ -2,7 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const CleanWebpackPlugin    = require('clean-webpack-plugin');
+const WebpackNotifierPlugin = require('webpack-notifier');
 module.exports = {
 	context: path.join(__dirname),
 
@@ -44,6 +45,8 @@ module.exports = {
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.NamedModulesPlugin(),
+		new WebpackNotifierPlugin(),
+		new CleanWebpackPlugin(['dist']),
 		new webpack.optimize.UglifyJsPlugin(),
 		new ExtractTextPlugin('styles.css'),
 		new webpack.optimize.CommonsChunkPlugin({name: 'commons', filename: 'commons.js', minChunks: Infinity}),
