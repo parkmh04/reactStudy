@@ -17,6 +17,8 @@ module.exports = {
 
 	devServer: {
 		hot: true,
+		compress: false,
+    inline: true,
 		filename: 'bundle.js',
 		publicPath: '/',
 		historyApiFallback: true,
@@ -36,7 +38,8 @@ module.exports = {
 					{
 						loader: 'react-hot-loader'
 					}, {
-						loader: 'babel-loader'
+						loader: 'babel-loader',
+						options: { sourceMap: true, cacheDirectory: true }
 					}, {
 						loader: 'eslint-loader',
 						options: {
@@ -52,6 +55,11 @@ module.exports = {
 	},
 
 	plugins: [
+		new webpack.LoaderOptionsPlugin({
+      cache: true,
+      debug: true,
+      minimize: false
+    }),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NamedModulesPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),

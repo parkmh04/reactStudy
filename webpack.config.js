@@ -13,7 +13,8 @@ module.exports = {
 		filename: 'bundle.js'
 	},
 
-	devtool: 'cheap-module-source-map',
+	// devtool: 'cheap-module-source-map',
+	devtool: 'cheap-module-eval-source-map',
 
 	module: {
 		rules: [
@@ -23,7 +24,8 @@ module.exports = {
 				include: path.join(__dirname, 'src'),
 				use: [
 					{
-						loader: 'babel-loader'
+						loader: 'babel-loader',
+						options: { sourceMap: true, cacheDirectory: true }
 					}, {
 						loader: 'eslint-loader',
 						options: {
