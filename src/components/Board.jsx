@@ -14,6 +14,7 @@ class Board extends React.Component {
 		squares[i] = 'X';
 		this.setState({squares: squares});
 		console.log(i);
+		console.log('클릭하면 로그 찍히게 변경');
 	}
 
 	renderSquare(i) {
