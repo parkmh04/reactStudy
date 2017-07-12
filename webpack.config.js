@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin    = require('clean-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 module.exports = {
 	context: path.join(__dirname),
@@ -11,11 +11,11 @@ module.exports = {
 
 	output: {
 		path: path.join(__dirname, 'dist'),
-		filename: 'bundle.js'
+		filename: 'bundle.[hash].js'
 	},
 
-	// devtool: 'cheap-module-source-map',
-	devtool: 'cheap-module-eval-source-map',
+	devtool: 'cheap-module-source-map',
+	// devtool: 'cheap-module-eval-source-map',
 
 	module: {
 		rules: [
@@ -26,7 +26,10 @@ module.exports = {
 				use: [
 					{
 						loader: 'babel-loader',
-						options: { sourceMap: true, cacheDirectory: true }
+						options: {
+							sourceMap: true,
+							cacheDirectory: true
+						}
 					}, {
 						loader: 'eslint-loader',
 						options: {
@@ -58,14 +61,37 @@ module.exports = {
 	},
 
 	plugins: [
+		new webpack.LoaderOptionsPlugin({
+			minimize: true,
+			debug: false,
+			options: {
+				context: __dirname
+			}
+		}),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.NamedModulesPlugin(),
 		new WebpackNotifierPlugin(),
 		new CleanWebpackPlugin(['dist']),
-		new webpack.optimize.UglifyJsPlugin(),
+		new webpack.DefinePlugin({
+			'process.env': {
+				'NODE_ENV': JSON.stringify('production')
+			}
+		}),
 		new ExtractTextPlugin('styles.css'),
-		new webpack.optimize.CommonsChunkPlugin({name: 'commons', filename: 'commons.js', minChunks: Infinity}),
+		new webpack.optimize.CommonsChunkPlugin({name: 'commons', filename: 'commons.[hash].js', minChunks: Infinity}),
+		new webpack.optimize.UglifyJsPlugin({
+			beautify: false,
+			mangle: {
+				screw_ie8: true,
+				keep_fnames: true
+			},
+			compress: {
+				screw_ie8: true,
+				warnings: false
+			},
+			comments: false
+		}),
 		new HtmlWebpackPlugin({
 			template: './public/index.html',
 			minify: {
@@ -76,6 +102,6 @@ module.exports = {
 		})
 	],
 	resolve: {
-		extensions: ['.js','.jsx', '.css']
+		extensions: ['.js', '.jsx', '.css']
 	}
 };
