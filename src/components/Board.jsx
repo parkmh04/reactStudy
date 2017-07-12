@@ -2,28 +2,11 @@ import React from 'react';
 import Square from './Square';
 
 class Board extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			squares: Array(9).fill(null)
-		};
-	}
-
-	handleClick(i) {
-		const squares = this.state.squares.slice();
-		squares[i] = 'X';
-		this.setState({squares: squares});
-		console.log(i);
-		console.log('클릭하면 로그 찍히게 변경');
-	}
-
 	renderSquare(i) {
-		return (<Square value={this.state.squares[i]} onClick={()=>this.handleClick(i)}/>);
+		return (<Square value={this.props.squares[i]} onClick={() => this.props.onClick(i)}/>);
 	}
 
 	render() {
-		const status = 'Next player: X';
-
 		return (
 			<div>
 				<div className="status">{status}</div>
