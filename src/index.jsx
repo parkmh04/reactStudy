@@ -3,4 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-ReactDOM.render(<App/>, document.getElementById('every-chospeed'));
+const everyChospeed = document.getElementById('every-chospeed');
+if(everyChospeed) {
+	ReactDOM.render(<App/>, document.getElementById('every-chospeed'));
+}

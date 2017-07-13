@@ -10,7 +10,7 @@ class Square extends Component {
 		return (JSON.stringify(nextProps) != JSON.stringify(this.props));
 	}
 	render() {
-		console.log(`render: ${this.props.seq}`);
+
 		return (
 			<button className="square" onClick={() => this.props.onClick()}>
 				{this.props.value}
