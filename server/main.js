@@ -9,7 +9,7 @@ if (process.env.NODE_ENV == 'development') {
 	const config = require('../webpack.dev.config');
 	const compiler = Webpack(config);
 	const devServer = new WebpackDevServer(compiler, config.devServer);
-	devServer.listen(devPort, () => {
+	devServer.listen(devPort,'0.0.0.0', () => {
 		console.log(`Listening on port: ${devPort}`);
 	});
 }
