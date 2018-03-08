@@ -23,3 +23,5 @@ open browser : `http://localhost:3000`
 $ npm build
 $ npm dev
 open browser : `http://localhost:3001`
+
+2018.03.08 우선 이걸로 공부를 시작해보자..
